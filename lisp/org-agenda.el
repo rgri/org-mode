@@ -11201,8 +11201,12 @@ The prefix arg is passed through to the command if possible."
 		       (let* ((date (calendar-gregorian-from-absolute
 				     (+ (org-today) distance)))
 			      (time (org-encode-time
-                                     0 0 0 (nth 1 date) (nth 0 date) (nth 2 date))))
-			 (org-agenda-schedule nil time))))))))
+                                     0 0 0 (nth 1 date) (nth 0 date) (nth 2 date)))
+                              (log-state org-log-reschedule))
+                         (setq org-log-reschedule nil)
+			 (org-agenda-schedule nil time)
+                         (setq org-log-reschedule log-state)
+                         )))))))
 
 	(?f
 	 (setq cmd
